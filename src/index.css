@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Sacramento&family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Ubuntu:wght@700&display=swap');
+
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h1 {
+  font-family: 'Ubuntu', sans-serif;
+  margin-top: 0px;
+  /*color: rgb(238, 142, 107);
+  color: rgb(238, 142, 107);*/
+  font-size: 3rem;
+  /*background: -webkit-linear-gradient(rgb(238, 142, 107), rgba(239, 109, 160, 0.74));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;*/
+}
+
+h2 {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.75rem;
+  color: rgba(0,0,0,0.8);
+  /*color: rgba(239, 109, 160, 0.74);*/
+}
+
+
+p {
+  font-size: 0.93rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
+ul.list {
+  list-style-type: none;
+}
+
+ul.list > li {
+  margin: 2rem 2rem 3rem -2rem;
+  padding-left: 3rem;
+  /*border-left: 6px solid rgba(231, 211, 219, 0.74);*/
+}
