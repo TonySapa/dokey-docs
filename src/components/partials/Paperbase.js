@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-import { labels, customStyles } from '../../labels/labels.js';
+import { coreStyling, customStyles, labels } from '../../labels/labels.js';
 import Navigator from './Navigator';
 //import Content from '../Content';
 import Header from './Header';
@@ -148,11 +148,11 @@ const styles = {
   },
 };
 
-const html = (element, content) =>
+const html = (element, content, req) =>
   element === 'h1'
-    ? <h1>{content}</h1>
+    ? <h1><span style={coreStyling.req[req]}>{req}</span>{content}</h1>
     : element === 'h2'
-      ? <h2>{content}</h2>
+      ? <h2>{req}{content}</h2>
       : element === 'h3'
         ? <h3>{content}</h3>
         : null
@@ -196,7 +196,7 @@ const Paperbase = (props) => {
                 {props.sections
                   ? props.sections.map(s => (
                       <div id={s.title ? setRef(s.title) : null}>
-                        {s.type && s.title ? html(s.type, s.title) : null}
+                        {s.type && s.title ? html(s.type, s.title, s.req) : null}
                         {s.paragraph ? s.paragraph : null}
                       </div>
                     ))

@@ -11,7 +11,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { customStyles, labels } from './../../labels/labels.js'
+import { coreStyling, customStyles, labels } from './../../labels/labels.js'
 
 const l = labels;
 const categories = labels.sideBar.categories
@@ -40,7 +40,10 @@ const Navigator = (props) => {
 
   return (
     <Drawer variant="permanent" {...other}>
+
       <List disablePadding>
+
+        {/* APP LOGO */}
         <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
           <a href='/' style={{textDecoration:'none'}}>
             <h5 className={classes.logo}>
@@ -49,22 +52,25 @@ const Navigator = (props) => {
           </a>
           <span className={classes.version}>{l.appVersion}</span>
         </ListItem>
-        <ListItem className={clsx(classes.item, classes.itemCategory)}>
-        <ListItemText>
-          <Grid item xs>
-            <TextField
-              fullWidth
-              variant='outlined'
-              placeholder={l.sideBar.searchPlaceholder}
-              InputProps={{
-                disableUnderline: true,
-                className: classes.searchInput,
-              }}
-            />
-          </Grid>
-        </ListItemText>
-        </ListItem>
 
+        {/* SEARCHING BAR */}
+        <ListItem className={clsx(classes.item, classes.itemCategory)}>
+          <ListItemText>
+            <Grid item xs>
+              <TextField
+                fullWidth
+                variant='outlined'
+                placeholder={l.sideBar.searchPlaceholder}
+                InputProps={{
+                  disableUnderline: true,
+                  className: classes.searchInput,
+                }}
+              />
+            </Grid>
+          </ListItemText>
+        </ListItem>
+        
+        {/* NAV SECTION */}
         {categories.map(({ id, children }) => (
           <React.Fragment key={id}>
             <ListItem className={classes.categoryHeader}>
@@ -76,29 +82,22 @@ const Navigator = (props) => {
                 {id}
               </ListItemText>
             </ListItem>
-            {children.map(({ id: childId, link, icon, active }) => (
-              <Link to={link} className={classes.tab} onClick={() => link ? setCurrent(link) : null}>
+            {children.map(i => (
+              <Link to={i.link} className={classes.tab} onClick={() => i.link ? setCurrent(i.link) : null}>
                 <ListItem
-                  key={childId}
+                  key={i.id}
                   button
-                  className={clsx(classes.item, active && classes.itemActiveItem)}
+                  className={clsx(classes.item, i.active && classes.itemActiveItem)} // Active tab styles
                 >
-                  {link === current && current !== undefined
-                  ? <ListItemText
-                      classes={{
-                        primary: classes.itemPrimary,
-                      }}
-                      className={classes.tabText}
-                    >
-                      {childId}
-                    </ListItemText>
-                  : <ListItemText
-                      classes={{
-                        primary: classes.itemPrimary,
-                      }}
-                    >
-                      {childId}
-                    </ListItemText>}
+                  <ListItemText
+                    classes={{
+                      primary: classes.itemPrimary,
+                    }}
+                    className={i.link === current && current !== undefined ? classes.tabText : null}
+                  >
+                    <span style={coreStyling.req[i.req]}>{i.req}</span>
+                    {i.id}
+                  </ListItemText>
                 </ListItem>
               </Link>
             ))}
@@ -106,7 +105,9 @@ const Navigator = (props) => {
             <Divider className={classes.divider} />
           </React.Fragment>
         ))}
+
       </List>
+
     </Drawer>
   );
 }

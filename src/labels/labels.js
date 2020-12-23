@@ -1,9 +1,9 @@
 import React from 'react'
 // syntax highlighter
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { a11yDark, a11yLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Alink from './../components/partials/Link.js';
-
+import requestDemo from './../components/partials/requestDemo.js';
 
 export const labels = {
   appName: 'dockee',
@@ -150,22 +150,111 @@ export const labels = {
         ],
       },
       {
-        id: 'Lore Ipsum',
+        id: 'Users',
         children: [
-          { id: 'Lore Ipsum', link: '/lore-ipsum'},
-          { id: 'Ipsum', link: '/ipsum'},
-          { id: 'Lore', link: '/lore'},
-          { id: 'Features', link: '/features'},
-          { id: 'Toni', link: '/toni'},
-          { id: 'Pricing', link: '/pricing'},
-          { id: 'Last lore', link: '/last-lore'}
-        ],
-      },
-      {
-        id: 'Ipsum',
-        children: [
-          { id: 'demo lore', link: '/demo-lore'},
-          { id: 'demo ipsum', link: '/demo-ipsum'},
+          { id: 'All users', req: 'GET', link: '/users', sections: [
+            {
+              title: 'All users',
+              req: 'GET',
+              type: 'h1',
+              paragraph:
+                <div>
+                  <h2>GET all users</h2>
+                  <p>This endpoint retrieves all users of the specified firm</p>
+                  <br/>
+                </div>
+            },
+            {
+              title: 'HTTP Request',
+              type: 'h3',
+              paragraph:
+                <div>
+                  <SyntaxHighlighter language="javascript" style={a11yLight}>
+                    GET https://api.demosite.com/users
+                  </SyntaxHighlighter>
+                  <br/>
+                </div>
+            },
+            {
+              title: 'Query Parameters',
+              type: 'h3',
+              paragraph:
+                <div>
+                  <table>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Default</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td>admin</td>
+                      <td>false</td>
+                      <td>Only users with admin privileges</td>
+                    </tr>
+                    <tr>
+                      <td>bin</td>
+                      <td>false</td>
+                      <td>Include previously deleted users</td>
+                    </tr>
+                  </table>
+                  <br/>
+                </div>
+            },
+            {
+              title: 'Response',
+              type: 'h3',
+              paragraph:
+              <div>
+                <h4>Status code 200</h4>
+                <SyntaxHighlighter language="javascript" style={a11yDark}>{
+`[
+  {
+    id: 001,
+    email: mail1@mail.com,
+    username: user1,
+    admin: true
+  },
+  {
+    id: 002,
+    email: mail2@mail.com,
+    username: user2,
+    admin: false
+  }
+]`
+                }</SyntaxHighlighter>
+                
+                <h4>Status code 204</h4>
+                <SyntaxHighlighter language="javascript" style={a11yDark}>{
+  `{}`
+                }</SyntaxHighlighter>
+
+              </div>
+            }
+          ]},
+          { id: 'Find user', req: 'GET', link: '/demo-ipsum', sections: [
+            {
+              title: 'Find user',
+              req: 'GET',
+              type: 'h1',
+              paragraph: <p>Find a specific user</p>
+            }
+          ]},
+          { id: 'Change email', req: 'PUT', link: '/change-email', sections: [
+            {
+              title: 'Change user email',
+              req: 'PUT',
+              type: 'h1',
+              paragraph: <p>Change user email</p>
+            }
+          ]},
+          { id: 'Delete user', req: 'DELETE', link:'/delete-user', sections: [
+            {
+              title: 'Permanently delete a user',
+              req: 'DELETE',
+              type: 'h1',
+              paragraph: <p>Delete user</p>
+            }
+          ]}
         ],
       }
     ]
@@ -174,7 +263,33 @@ export const labels = {
 
 export const coreStyling = {
   mainColor: '#6190E8',
-  color2: '#A7BFE8'
+  color2: '#A7BFE8',
+  req: {
+    GET: {
+      background: '#6190E8',
+      color: 'rgba(255,255,255,0.8)',
+      fontSize: '0.8em',
+      padding: '3px 10px',
+      margin: '0 10px 0 0',
+      borderRadius: '25px'
+    },
+    PUT: {
+      background: 'orange',
+      color: 'rgba(255,255,255,0.8)',
+      fontSize: '0.8em',
+      padding: '3px 10px',
+      margin: '0 10px 0 0',
+      borderRadius: '25px'
+    },
+    DELETE: {
+      background: 'rgb(220,20,60,0.8)',
+      color: 'rgba(255,255,255,0.8)',
+      fontSize: '0.8em',
+      padding: '3px 10px',
+      margin: '0 10px 0 0',
+      borderRadius: '25px'
+    }
+  }
 }
 
 export const customStyles = {
